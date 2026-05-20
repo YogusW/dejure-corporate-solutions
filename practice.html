@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practice Areas — Dejure Corporate Solution</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── PRACTICE PAGE HERO ── */
+    .practice-page-hero {
+      background: var(--charcoal);
+      padding: calc(var(--nav-h) + 80px) 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .practice-hero-bg-lines {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        repeating-linear-gradient(0deg,  transparent, transparent 79px, rgba(201,151,58,0.04) 80px),
+        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(201,151,58,0.04) 80px);
+    }
+    .practice-hero-inner { max-width: 820px; }
+    .practice-hero-title {
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      color: var(--cream); font-weight: 400; line-height: 1.1;
+      margin-top: 0.6rem; margin-bottom: 1.4rem;
+    }
+    .practice-hero-title em { color: var(--mehroon-light); }
+    .practice-hero-desc {
+      font-size: 1.05rem; font-weight: 300;
+      color: rgba(255,249,235,0.58);
+      line-height: 1.9; max-width: 640px;
+    }
+
+    /* ── PRACTICE AREAS SECTION ── */
+    .practice-areas-section { background: var(--cream); padding: 100px 0; }
+
+    /* ── CARD BASE ── */
+    .pa-card {
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      transition: var(--transition);
+      position: relative;
+    }
+    .pa-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(28,28,28,0.1); }
+
+    /* ── CARD 1: STATUTORY COMPLIANCES (dark, expanded) ── */
+    .pa-card--statutory {
+      background: var(--charcoal);
+      border: 1px solid rgba(255,249,235,0.07);
+    }
+    .pa-card--statutory::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--mehroon), var(--mehroon-light), transparent);
+    }
+    .pa-statutory-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      min-height: 340px;
+    }
+    .pa-statutory-left {
+      padding: 52px 48px;
+      background: var(--mehroon);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .pa-statutory-left::after {
+      content: '01';
+      position: absolute;
+      bottom: -20px; right: -10px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 9rem; line-height: 1;
+      color: rgba(255,249,235,0.06);
+      pointer-events: none;
+    }
+    .pa-statutory-left .pa-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 0.75rem; letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,249,235,0.55);
+      margin-bottom: 20px;
+    }
+    .pa-statutory-left h2 {
+      font-size: 2rem; font-weight: 500;
+      color: var(--cream); line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .pa-statutory-left .pa-short-desc {
+      font-size: 0.88rem; font-weight: 300;
+      color: rgba(255,249,235,0.65);
+      line-height: 1.85;
+      position: relative; z-index: 1;
+    }
+    .pa-statutory-right {
+      padding: 52px 52px;
+      background: var(--charcoal);
+    }
+    .pa-statutory-right .pa-sub-label {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--mehroon-light);
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pa-statutory-right .pa-sub-label::before {
+      content: ''; display: inline-block;
+      width: 24px; height: 1px; background: var(--mehroon-light);
+    }
+    .pa-pointers {
+      display: flex; flex-direction: column; gap: 0;
+      list-style: none;
+    }
+    .pa-pointers li {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,249,235,0.06);
+      transition: padding-left 0.3s;
+    }
+    .pa-pointers li:last-child { border-bottom: none; }
+    .pa-pointers li:hover { padding-left: 6px; }
+    .pa-pointer-arrow {
+      color: var(--mehroon-light);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: transform 0.25s;
+    }
+    .pa-pointers li:hover .pa-pointer-arrow { transform: translateX(4px); }
+    .pa-pointer-content strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 3px;
+    }
+    .pa-pointer-content span {
+      font-size: 0.8rem; font-weight: 300;
+      color: rgba(255,249,235,0.45);
+      line-height: 1.65;
+    }
+
+    /* ── CARD 2: CONSULTANCY SERVICES (light, 4 simple pointers) ── */
+    .pa-card--consultancy {
+      background: var(--white);
+      border: 1px solid var(--cream-deeper);
+    }
+    .pa-consultancy-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      min-height: 280px;
+    }
+    .pa-consultancy-left {
+      padding: 48px 44px;
+      background: var(--cream-dark);
+      border-right: 1px solid var(--cream-deeper);
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .pa-consultancy-left::after {
+      content: '02';
+      position: absolute;
+      bottom: -20px; right: -10px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 8rem; line-height: 1;
+      color: rgba(28,28,28,0.04);
+      pointer-events: none;
+    }
+    .pa-consultancy-left .pa-num {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--mehroon); margin-bottom: 16px;
+    }
+    .pa-consultancy-left h2 {
+      font-size: 1.7rem; font-weight: 500;
+      color: var(--charcoal); line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .pa-consultancy-left p {
+      font-size: 0.87rem; font-weight: 300;
+      color: var(--text-muted); line-height: 1.85;
+      position: relative; z-index: 1;
+    }
+    .pa-consultancy-right {
+      padding: 48px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .pa-simple-pointers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      list-style: none;
+    }
+    .pa-simple-pointers li {
+      padding: 22px 24px 22px 0;
+      border-bottom: 1px solid rgba(28,28,28,0.07);
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .pa-simple-pointers li:nth-child(odd) {
+      padding-right: 36px;
+      border-right: 1px solid rgba(28,28,28,0.07);
+    }
+    .pa-simple-pointers li:nth-child(even) {
+      padding-left: 36px;
+    }
+    .pa-simple-pointers li:nth-last-child(-n+2) { border-bottom: none; }
+    .pa-sp-icon {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--mehroon-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; flex-shrink: 0;
+      color: var(--mehroon);
+      transition: background 0.3s;
+    }
+    .pa-simple-pointers li:hover .pa-sp-icon { background: var(--mehroon); color: var(--cream); }
+    .pa-sp-text strong {
+      display: block;
+      font-size: 0.92rem; font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+    }
+    .pa-sp-text span {
+      font-size: 0.78rem; font-weight: 300;
+      color: var(--text-muted); line-height: 1.6;
+    }
+
+    /* ── CARD 3: LITIGATION (simple, single wide box) ── */
+    .pa-card--litigation {
+      background: var(--mehroon);
+      border: 1px solid rgba(182,62,61,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .pa-card--litigation::before {
+      content: ''; position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: rgba(255,249,235,0.05);
+      pointer-events: none;
+    }
+    .pa-card--litigation::after {
+      content: '03';
+      position: absolute;
+      bottom: -30px; left: 40px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 10rem; line-height: 1;
+      color: rgba(255,249,235,0.05);
+      pointer-events: none;
+    }
+    .pa-litigation-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 52px 52px;
+      gap: 48px;
+      position: relative; z-index: 1;
+    }
+    .pa-lit-heading .pa-num {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,249,235,0.5); margin-bottom: 16px;
+    }
+    .pa-lit-heading h2 {
+      font-size: 2rem; font-weight: 500;
+      color: var(--cream); line-height: 1.2;
+    }
+    .pa-lit-desc {
+      display: flex; flex-direction: column; justify-content: center;
+      border-left: 1px solid rgba(255,249,235,0.15);
+      padding-left: 48px;
+    }
+    .pa-lit-desc p {
+      font-size: 0.9rem; font-weight: 300;
+      color: rgba(255,249,235,0.7);
+      line-height: 1.9;
+    }
+    .pa-lit-details {
+      display: flex; flex-direction: column; justify-content: center;
+      border-left: 1px solid rgba(255,249,235,0.15);
+      padding-left: 48px;
+    }
+    .pa-lit-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .pa-lit-tag {
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.08em;
+      color: rgba(255,249,235,0.75);
+      border: 1px solid rgba(255,249,235,0.25);
+      padding: 6px 14px; border-radius: 2px;
+      transition: var(--transition);
+    }
+    .pa-lit-tag:hover { background: rgba(255,249,235,0.12); color: var(--cream); }
+
+    /* ── CARD 4: NON-LITIGATION SERVICES (mirrors statutory) ── */
+    .pa-card--nonlit {
+      background: var(--cream-dark);
+      border: 1px solid var(--cream-deeper);
+    }
+    .pa-card--nonlit::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--mehroon), transparent);
+    }
+    .pa-nonlit-inner {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      min-height: 340px;
+    }
+    .pa-nonlit-left {
+      padding: 52px 52px;
+      background: var(--cream-dark);
+    }
+    .pa-nonlit-left .pa-sub-label {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--mehroon);
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pa-nonlit-left .pa-sub-label::before {
+      content: ''; display: inline-block;
+      width: 24px; height: 1px; background: var(--mehroon);
+    }
+    .pa-nonlit-pointers {
+      display: flex; flex-direction: column; gap: 0;
+      list-style: none;
+    }
+    .pa-nonlit-pointers li {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(28,28,28,0.07);
+      transition: padding-left 0.3s;
+    }
+    .pa-nonlit-pointers li:last-child { border-bottom: none; }
+    .pa-nonlit-pointers li:hover { padding-left: 6px; }
+    .pa-nonlit-arrow {
+      color: var(--mehroon); font-size: 0.85rem;
+      flex-shrink: 0; margin-top: 3px;
+      transition: transform 0.25s;
+    }
+    .pa-nonlit-pointers li:hover .pa-nonlit-arrow { transform: translateX(4px); }
+    .pa-nonlit-pointer-content strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.98rem; font-weight: 500;
+      color: var(--charcoal); margin-bottom: 2px;
+    }
+    .pa-nonlit-pointer-content span {
+      font-size: 0.78rem; font-weight: 300;
+      color: var(--text-muted); line-height: 1.6;
+    }
+    .pa-nonlit-right {
+      padding: 52px 44px;
+      background: var(--white);
+      border-left: 1px solid var(--cream-deeper);
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+    }
+    .pa-nonlit-right::after {
+      content: '04';
+      position: absolute;
+      bottom: -20px; right: -10px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 9rem; line-height: 1;
+      color: rgba(28,28,28,0.04);
+      pointer-events: none;
+    }
+    .pa-nonlit-right .pa-num {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--mehroon); margin-bottom: 16px;
+    }
+    .pa-nonlit-right h2 {
+      font-size: 1.7rem; font-weight: 500;
+      color: var(--charcoal); line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .pa-nonlit-right p {
+      font-size: 0.87rem; font-weight: 300;
+      color: var(--text-muted); line-height: 1.85;
+      position: relative; z-index: 1;
+      flex: 1;
+    }
+    .pa-nonlit-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--mehroon-pale);
+      border: 1px solid rgba(182,62,61,0.15);
+      padding: 10px 18px; border-radius: 4px;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--mehroon);
+      margin-top: 24px;
+      position: relative; z-index: 1;
+    }
+
+    /* ── CARD 5: IT SECTOR (bold, dark accent) ── */
+    .pa-card--it {
+      background: var(--charcoal);
+      border: 1px solid rgba(255,249,235,0.07);
+      overflow: hidden;
+    }
+    .pa-card--it::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--mehroon-light), var(--mehroon), transparent);
+    }
+    .pa-it-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    .pa-it-top {
+      padding: 52px 52px 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      border-bottom: 1px solid rgba(255,249,235,0.06);
+    }
+    .pa-it-heading .pa-num {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,249,235,0.4); margin-bottom: 16px;
+    }
+    .pa-it-heading h2 {
+      font-size: 2.2rem; font-weight: 500;
+      color: var(--cream); line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .pa-it-heading h2 em { color: var(--mehroon-light); }
+    .pa-it-intro p {
+      font-size: 0.9rem; font-weight: 300;
+      color: rgba(255,249,235,0.6);
+      line-height: 1.9;
+      padding-top: 8px;
+    }
+    .pa-it-bottom {
+      padding: 36px 52px 52px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .pa-it-feature {
+      padding: 24px 28px 24px 0;
+      border-right: 1px solid rgba(255,249,235,0.07);
+      transition: var(--transition);
+    }
+    .pa-it-feature:last-child { border-right: none; padding-right: 0; }
+    .pa-it-feature:not(:first-child) { padding-left: 28px; }
+    .pa-it-feature:hover { background: rgba(255,249,235,0.02); }
+    .pa-it-feature-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem; font-style: italic;
+      color: var(--mehroon); opacity: 0.5;
+      margin-bottom: 12px;
+    }
+    .pa-it-feature h4 {
+      font-size: 0.92rem; font-weight: 600;
+      color: var(--cream); margin-bottom: 8px;
+    }
+    .pa-it-feature p {
+      font-size: 0.78rem; font-weight: 300;
+      color: rgba(255,249,235,0.4); line-height: 1.7;
+    }
+
+    /* ── CONTACT SECTION ── */
+    .practice-contact-section { background: var(--cream-dark); padding: 100px 0; }
+    .practice-contact-inner {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .practice-contact-left .section-heading { margin-bottom: 1rem; }
+    .practice-contact-left > p {
+      font-size: 0.93rem; font-weight: 300;
+      color: var(--text-light); line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+    .pcd-details { display: flex; flex-direction: column; gap: 20px; }
+
+    /* section label at top */
+    .practice-areas-section .section-header { margin-bottom: 56px; }
+
+    /* Responsive practice page */
+    @media (max-width: 1024px) {
+      .pa-statutory-inner,
+      .pa-consultancy-inner,
+      .pa-nonlit-inner { grid-template-columns: 1fr; }
+      .pa-statutory-left,
+      .pa-consultancy-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .pa-nonlit-right { border-left: none; border-top: 1px solid var(--cream-deeper); }
+      .pa-litigation-inner { grid-template-columns: 1fr 1fr; }
+      .pa-lit-details { grid-column: 1 / -1; border-left: none; border-top: 1px solid rgba(255,249,235,0.15); padding-left: 0; padding-top: 28px; }
+      .pa-it-bottom { grid-template-columns: repeat(2, 1fr); }
+      .pa-it-feature:nth-child(2) { border-right: none; }
+      .pa-it-feature:nth-child(3) { border-right: 1px solid rgba(255,249,235,0.07); }
+      .pa-it-feature { padding-top: 0; }
+      .pa-simple-pointers { grid-template-columns: 1fr; }
+      .pa-simple-pointers li:nth-child(odd) { border-right: none; padding-right: 0; }
+      .pa-simple-pointers li:nth-child(even) { padding-left: 0; }
+      .pa-simple-pointers li:nth-last-child(-n+2) { border-bottom: 1px solid rgba(28,28,28,0.07); }
+      .pa-simple-pointers li:last-child { border-bottom: none; }
+      .practice-contact-inner { grid-template-columns: 1fr; gap: 52px; }
+    }
+    @media (max-width: 768px) {
+      .pa-litigation-inner { grid-template-columns: 1fr; padding: 36px 28px; gap: 28px; }
+      .pa-lit-desc,
+      .pa-lit-details { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,249,235,0.15); padding-top: 24px; }
+      .pa-statutory-left,
+      .pa-statutory-right,
+      .pa-consultancy-left,
+      .pa-consultancy-right,
+      .pa-nonlit-left,
+      .pa-nonlit-right { padding: 36px 28px; }
+      .pa-it-top { grid-template-columns: 1fr; padding: 36px 28px 28px; gap: 24px; }
+      .pa-it-bottom { grid-template-columns: 1fr 1fr; padding: 28px; }
+      .pa-it-feature:nth-child(3) { border-right: none; }
+    }
+  </style>
+</head>
+<body data-page="about">
+
+  <div class="grain"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <span class="logo-h">D</span>
+        <span class="logo-full">ejure Corporate Solution</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html"    class="nav-link">Home</a></li>
+        <li><a href="about.html"    class="nav-link">About Us</a></li>
+        <li><a href="team.html"     class="nav-link">Our Team</a></li>
+        <li><a href="practice.html" class="nav-link active">Practice Areas</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html"    class="mob-link">Home</a>
+      <a href="about.html"    class="mob-link">About Us</a>
+      <a href="team.html"     class="mob-link">Our Team</a>
+      <a href="practice.html" class="mob-link">Practice Areas</a>
+      <a href="#practice-contact" class="mob-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section class="practice-page-hero">
+    <div class="practice-hero-bg-lines"></div>
+    <div class="container-wide">
+      <div class="practice-hero-inner">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <div class="reveal">
+          <span class="section-eyebrow" style="color:var(--gold)">What We Do</span>
+          <h1 class="practice-hero-title">Areas of<br /><em>Practice</em></h1>
+          <p class="practice-hero-desc">Deep, specialised expertise across five core areas — from regulatory compliance and strategic consultancy to courtroom litigation and technology law.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ PRACTICE AREAS ══════════════════ -->
+  <section class="practice-areas-section">
+    <div class="container-wide">
+
+      <!-- ─ CARD 1: STATUTORY COMPLIANCES ─ -->
+      <div class="pa-card pa-card--statutory reveal">
+        <div class="pa-statutory-inner">
+          <div class="pa-statutory-left">
+            <div>
+              <div class="pa-num">Practice Area · 01</div>
+              <h2>Statutory<br />Compliances</h2>
+              <p class="pa-short-desc">End-to-end statutory and regulatory compliance solutions — ensuring your business meets every legal obligation with precision, timeliness, and zero ambiguity.</p>
+            </div>
+          </div>
+          <div class="pa-statutory-right">
+            <div class="pa-sub-label">Key Services</div>
+            <ul class="pa-pointers">
+              <li>
+                <span class="pa-pointer-arrow">→</span>
+                <div class="pa-pointer-content">
+                  <strong>Labour Law Compliance</strong>
+                  <span>PF, ESI, Factories Act, Contract Labour regulations, and all statutory filings under applicable labour legislation.</span>
+                </div>
+              </li>
+              <li>
+                <span class="pa-pointer-arrow">→</span>
+                <div class="pa-pointer-content">
+                  <strong>Corporate Statutory Filings</strong>
+                  <span>ROC filings, annual returns, board resolutions, and secretarial compliance under the Companies Act, 2013.</span>
+                </div>
+              </li>
+              <li>
+                <span class="pa-pointer-arrow">→</span>
+                <div class="pa-pointer-content">
+                  <strong>Environmental &amp; Industry Approvals</strong>
+                  <span>Obtaining and renewing licences, NOCs, and environmental clearances across manufacturing and service sectors.</span>
+                </div>
+              </li>
+              <li>
+                <span class="pa-pointer-arrow">→</span>
+                <div class="pa-pointer-content">
+                  <strong>GST &amp; Tax Compliance</strong>
+                  <span>Advisory and filing support ensuring adherence to GST, income tax, and other fiscal regulatory requirements.</span>
+                </div>
+              </li>
+              <li>
+                <span class="pa-pointer-arrow">→</span>
+                <div class="pa-pointer-content">
+                  <strong>Compliance Audits &amp; Risk Review</strong>
+                  <span>Periodic audit of statutory obligations to identify gaps, mitigate exposure, and implement corrective frameworks.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─ CARD 2: CONSULTANCY SERVICES ─ -->
+      <div class="pa-card pa-card--consultancy reveal">
+        <div class="pa-consultancy-inner">
+          <div class="pa-consultancy-left">
+            <div class="pa-num">Practice Area · 02</div>
+            <h2>Consultancy<br />Services</h2>
+            <p>Strategic legal, HR, and business advisory — designed to align your operational frameworks with regulatory requirements and long-term commercial objectives.</p>
+          </div>
+          <div class="pa-consultancy-right">
+            <ul class="pa-simple-pointers">
+              <li>
+                <div class="pa-sp-icon">⚖</div>
+                <div class="pa-sp-text">
+                  <strong>Legal Advisory</strong>
+                  <span>Ongoing legal counsel on contracts, policies, and day-to-day business operations.</span>
+                </div>
+              </li>
+              <li>
+                <div class="pa-sp-icon">📋</div>
+                <div class="pa-sp-text">
+                  <strong>Policy Development</strong>
+                  <span>Drafting and reviewing internal policies, employee handbooks, and corporate governance frameworks.</span>
+                </div>
+              </li>
+              <li>
+                <div class="pa-sp-icon">🔄</div>
+                <div class="pa-sp-text">
+                  <strong>Process Optimisation</strong>
+                  <span>Identifying and restructuring legal and operational workflows to reduce risk and improve efficiency.</span>
+                </div>
+              </li>
+              <li>
+                <div class="pa-sp-icon">📑</div>
+                <div class="pa-sp-text">
+                  <strong>Contract Structuring</strong>
+                  <span>Strategic advice on commercial contract architecture, negotiation, and risk allocation.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─ CARD 3: LITIGATION ─ -->
+      <div class="pa-card pa-card--litigation reveal">
+        <div class="pa-litigation-inner">
+          <div class="pa-lit-heading">
+            <div class="pa-num">Practice Area · 03</div>
+            <h2>Litigation</h2>
+          </div>
+          <div class="pa-lit-desc">
+            <p>Representing clients with decisive legal advocacy across all levels of India's judicial and quasi-judicial system. From trial courts to the Supreme Court, our litigation team combines strategic thinking with deep procedural mastery to deliver results when it matters most.</p>
+          </div>
+          <div class="pa-lit-details">
+            <div class="pa-sub-label" style="font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,249,235,0.45);margin-bottom:16px;">Forums &amp; Jurisdictions</div>
+            <div class="pa-lit-tags">
+              <span class="pa-lit-tag">Supreme Court</span>
+              <span class="pa-lit-tag">High Courts</span>
+              <span class="pa-lit-tag">District Courts</span>
+              <span class="pa-lit-tag">NCLT / NCLAT</span>
+              <span class="pa-lit-tag">Arbitration Tribunals</span>
+              <span class="pa-lit-tag">Labour Courts</span>
+              <span class="pa-lit-tag">Consumer Forums</span>
+              <span class="pa-lit-tag">RERA Authority</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─ CARD 4: NON-LITIGATION SERVICES ─ -->
+      <div class="pa-card pa-card--nonlit reveal">
+        <div class="pa-nonlit-inner">
+          <div class="pa-nonlit-left">
+            <div class="pa-sub-label">Key Services</div>
+            <ul class="pa-nonlit-pointers">
+              <li>
+                <span class="pa-nonlit-arrow">→</span>
+                <div class="pa-nonlit-pointer-content">
+                  <strong>Company Incorporation &amp; Structuring</strong>
+                  <span>End-to-end support for entity formation — private limited, LLP, section 8, and subsidiary structures.</span>
+                </div>
+              </li>
+              <li>
+                <span class="pa-nonlit-arrow">→</span>
+                <div class="pa-nonlit-pointer-content">
+                  <strong>Contract Management &amp; Drafting</strong>
+                  <span>Commercial agreements, NDAs, vendor contracts, licensing agreements, and bespoke documentation.</span>
+                </div>
+              </li>
+              <li>
+                <span class="pa-nonlit-arrow">→</span>
+                <div class="pa-nonlit-pointer-content">
+                  <strong>Due Diligence</strong>
+                  <span>Legal, financial, and regulatory due diligence for M&amp;A, joint ventures, and investment transactions.</span>
+                </div>
+              </li>
+              <li>
+                <span class="pa-nonlit-arrow">→</span>
+                <div class="pa-nonlit-pointer-content">
+                  <strong>Regulatory Approvals &amp; Licences</strong>
+                  <span>Securing statutory approvals, sector-specific licences, and government clearances across industries.</span>
+                </div>
+              </li>
+              <li>
+                <span class="pa-nonlit-arrow">→</span>
+                <div class="pa-nonlit-pointer-content">
+                  <strong>Strategic Corporate Advisory</strong>
+                  <span>Board-level guidance on governance, restructuring, mergers, and long-term legal strategy.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="pa-nonlit-right">
+            <div>
+              <div class="pa-num">Practice Area · 04</div>
+              <h2>Non-Litigation<br />Services</h2>
+              <p>Comprehensive corporate legal solutions that protect your business interests before disputes arise — from formation and structuring to documentation and regulatory approvals.</p>
+            </div>
+            <div class="pa-nonlit-badge">
+              <span>●</span> Full-Lifecycle Corporate Support
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─ CARD 5: IT SECTOR ─ -->
+      <div class="pa-card pa-card--it reveal">
+        <div class="pa-it-inner">
+          <div class="pa-it-top">
+            <div class="pa-it-heading">
+              <div class="pa-num">Practice Area · 05</div>
+              <h2>IT &amp;<br /><em>Technology</em><br />Sector</h2>
+            </div>
+            <div class="pa-it-intro">
+              <p>Specialised legal and compliance solutions for India's rapidly evolving technology ecosystem. We support IT businesses, SaaS companies, startups, and digital platforms navigate the legal complexities unique to the sector — from data privacy and IP to corporate structures and commercial agreements.</p>
+            </div>
+          </div>
+          <div class="pa-it-bottom">
+            <div class="pa-it-feature">
+              <div class="pa-it-feature-num">i</div>
+              <h4>Data Privacy &amp; DPDPA</h4>
+              <p>Compliance frameworks under India's Digital Personal Data Protection Act, privacy policies, and cross-border data transfer advisory.</p>
+            </div>
+            <div class="pa-it-feature">
+              <div class="pa-it-feature-num">ii</div>
+              <h4>IP Protection &amp; Licensing</h4>
+              <p>Patent filings, software copyright, trademark registrations, technology licensing, and IP enforcement strategies for tech businesses.</p>
+            </div>
+            <div class="pa-it-feature">
+              <div class="pa-it-feature-num">iii</div>
+              <h4>SaaS &amp; Commercial Agreements</h4>
+              <p>Drafting and reviewing SaaS agreements, MSAs, SLAs, vendor contracts, and terms of service for technology platforms.</p>
+            </div>
+            <div class="pa-it-feature">
+              <div class="pa-it-feature-num">iv</div>
+              <h4>Startup &amp; VC Advisory</h4>
+              <p>Corporate structuring, ESOP frameworks, venture financing documentation, and regulatory compliance for early-to-growth stage companies.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════ CONTACT FORM ══════════════════ -->
+  <section class="section practice-contact-section" id="practice-contact">
+    <div class="container-wide">
+      <div class="practice-contact-inner">
+        <div class="contact-left reveal">
+          <span class="section-eyebrow">Get in Touch</span>
+          <h2 class="section-heading">Schedule a<br /><em style="color:var(--mehroon);">Consultation</em></h2>
+          <p>Our attorneys are available Monday through Saturday. We respond to all enquiries within one business day.</p>
+          <div class="pcd-details contact-details">
+            <div class="cd-item">
+              <span class="cd-label">New Delhi</span>
+              <span class="cd-val">12, Connaught Place<br />New Delhi 110 001</span>
+            </div>
+            <div class="cd-item">
+              <span class="cd-label">Phone</span>
+              <span class="cd-val">+91 &nbsp;&nbsp;<br />+91</span>
+            </div>
+            <div class="cd-item">
+              <span class="cd-label">Email</span>
+              <span class="cd-val">info@dejurecorporate.in</span>
+            </div>
+            <div class="cd-item">
+              <span class="cd-label">Hours</span>
+              <span class="cd-val">Mon–Fri: 9 AM – 7 PM<br />Sat: 10 AM – 2 PM</span>
+            </div>
+          </div>
+        </div>
+        <div class="contact-right reveal reveal-delay-1">
+          <form class="contact-form" id="practiceContactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="Your full name" required />
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="you@example.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" placeholder="+91 98765 43210" />
+            </div>
+            <div class="form-group">
+              <label>Subject / Practice Area</label>
+              <div class="select-wrap">
+                <select required>
+                  <option value="">Select a practice area</option>
+                  <option>Statutory Compliances</option>
+                  <option>Consultancy Services</option>
+                  <option>Litigation</option>
+                  <option>Non-Litigation Services</option>
+                  <option>IT Sector</option>
+                  <option>HR Consultancy</option>
+                </select>
+                <span class="select-arrow">↓</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea rows="4" placeholder="Please describe your legal matter briefly…" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Submit Enquiry →</button>
+            <p class="form-note">Submitting this form does not create an attorney-client relationship. All information is strictly confidential.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container-wide">
+      <div class="footer-inner">
+        <div class="footer-brand-col">
+          <div class="footer-logo">D<span>CS</span></div>
+          <p>Strategic legal counsel for complex matters. Serving clients across India since 20XX.</p>
+          <div class="footer-bar-reg">Bar Council of India Registered</div>
+        </div>
+        <div class="footer-links-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="team.html">Our Team</a></li>
+            <li><a href="practice.html">Practice Areas</a></li>
+            <li><a href="#practice-contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Practice Areas</h4>
+          <ul>
+            <li><a>Statutory Compliances</a></li>
+            <li><a>Consultancy Services</a></li>
+            <li><a>Litigation</a></li>
+            <li><a>Non-Litigation Services</a></li>
+            <li><a>IT Sector</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a>12, Connaught Place, New Delhi</a></li>
+            <li><a>+91 &nbsp;</a></li>
+            <li><a>+91 &nbsp;</a></li>
+            <li><a>info@dejurecorporate.in</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Dejure Corporate Solutions. All rights reserved.</span>
+        <span>Privacy Policy · Terms of Use</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Attach form handler for the practice page contact form
+    (function() {
+      const form = document.getElementById('practiceContactForm');
+      if (!form) return;
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        const originalText = btn.textContent;
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+        setTimeout(() => {
+          btn.textContent = '✓ Enquiry Received';
+          btn.style.background = '#8a2d2d';
+          let successMsg = form.querySelector('.form-success');
+          if (!successMsg) {
+            successMsg = document.createElement('p');
+            successMsg.className = 'form-success';
+            successMsg.textContent = 'Thank you for your enquiry. Our team will be in touch within one business day.';
+            form.appendChild(successMsg);
+          }
+          successMsg.classList.add('show');
+          setTimeout(() => {
+            form.reset();
+            btn.textContent = originalText;
+            btn.disabled = false;
+            btn.style.opacity = '';
+            btn.style.background = '';
+            successMsg.classList.remove('show');
+          }, 4000);
+        }, 1200);
+      });
+    })();
+  </script>
+</body>
+</html>
