@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Industries — Dejure Corporate Solution</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ── FMCG: Horizontal scrolling ticker-card strip ── */
+    .fmcg-strip-wrap {
+      margin-top: 2rem;
+      overflow-x: auto;
+      padding-bottom: .5rem;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .fmcg-strip-wrap::-webkit-scrollbar { display: none; }
+
+    .fmcg-strip {
+      display: flex;
+      gap: 1.25rem;
+      width: max-content;
+    }
+
+    .fmcg-pill {
+      position: relative;
+      background: var(--cream, #f5f0e8);
+      border: none;
+      border-radius: 0;
+      padding: 1.6rem 2rem 1.4rem;
+      min-width: 220px;
+      max-width: 240px;
+      flex-shrink: 0;
+      overflow: hidden;
+      transition: background .25s, color .25s, transform .2s;
+    }
+    .fmcg-pill::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #b63e3d;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform .3s cubic-bezier(.4,0,.2,1);
+      z-index: 0;
+    }
+    .fmcg-pill:hover::before { transform: scaleY(1); }
+    .fmcg-pill:hover { transform: translateY(-3px); }
+
+    .fmcg-pill-num {
+      display: block;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      color: var(--dark, #1a1810);
+      font-family: 'DM Sans', sans-serif;
+      margin-bottom: .7rem;
+      position: relative;
+      z-index: 1;
+      transition: color .25s;
+    }
+    .fmcg-pill h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--dark, #1a1810);
+      position: relative;
+      z-index: 1;
+      transition: color .25s;
+      margin: 0;
+    }
+    .fmcg-pill:hover h5 { color: #fff; }
+    .fmcg-pill:hover .fmcg-pill-num { color: rgba(255,255,255,.8); }
+
+    /* ── FINANCIAL: Two-column feature grid ── */
+    .fin-grid {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .5rem;
+      border: none;
+    }
+    @media (max-width: 680px) {
+      .fin-grid { grid-template-columns: 1fr; }
+    }
+
+    .fin-card {
+      padding: 2rem 1.8rem;
+      border: none;
+      position: relative;
+      transition: background .25s, color .25s;
+      background: var(--cream, #f5f0e8);
+    }
+    .fin-card:hover { background: #b63e3d; }
+    .fin-card:hover .fin-card-num,
+    .fin-card:hover h6,
+    .fin-card:hover p { color: #fff; }
+
+    .fin-card-num {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .65rem;
+      letter-spacing: .15em;
+      color: var(--dark, #1a1810);
+      margin-bottom: .9rem;
+      transition: color .25s;
+    }
+    .fin-card h6 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--dark, #1a1810);
+      margin: 0 0 .7rem;
+      transition: color .25s;
+    }
+    .fin-card p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem;
+      line-height: 1.65;
+      color: var(--text-muted, #5a5240);
+      margin: 0;
+      transition: color .25s;
+    }
+
+    /* ── COSMETICS: Same style as Healthcare (single-statement block) ── */
+    /* inherits .ind-block styles from style.css */
+
+    /* Cosmetics membership badge — mirrors the ethics committee note */
+    .cosm-badge {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding: 1.4rem 1.6rem;
+      border-left: 3px solid #b63e3d;
+      background: rgba(182,62,61,.06);
+    }
+    .cosm-badge-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+    .cosm-badge p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem;
+      line-height: 1.6;
+      color: var(--text-muted, #5a5240);
+      margin: 0;
+    }
+    .cosm-badge strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--dark, #1a1810);
+      font-weight: 600;
+      margin-bottom: .25rem;
+    }
+
+    /* ── Sidebar extra entry ── */
+    /* no extra CSS needed — existing nav styles cover it */
+  </style>
+</head>
+<body data-page="industries">
+
+  <div class="grain"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <span class="logo-h">D</span>
+        <span class="logo-full">ejure Corporate Solution</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html"         class="nav-link">Home</a></li>
+        <li><a href="about.html"         class="nav-link">About Us</a></li>
+        <li><a href="team.html"          class="nav-link">Our Team</a></li>
+        <li><a href="practice.html"      class="nav-link">Practice Areas</a></li>
+        <li><a href="industries.html"    class="nav-link active">Industries Served</a></li>
+        <li><a href="contact.html"       class="nav-link">Contact Us</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html"         class="mob-link">Home</a>
+      <a href="about.html"         class="mob-link">About Us</a>
+      <a href="industries.html"    class="mob-link">Industries</a>
+      <a href="team.html"          class="mob-link">Our Team</a>
+      <a href="index.html#contact" class="mob-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="ind-page-hero">
+    <div class="container-wide">
+      <a href="index.html" class="back-link">← Back to Home</a>
+      <div class="reveal">
+        <span class="section-eyebrow" style="color:var(--white)">Sectors We Serve</span>
+        <h1 class="ind-page-hero-title">Industries We <em>Serve</em></h1>
+        <p class="ind-page-hero-desc">Sector-specific legal knowledge built over three decades — delivering precise, commercially-aware counsel across India's most dynamic industries.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN LAYOUT -->
+  <div class="ind-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="ind-sidebar">
+      <nav class="ind-sidebar-nav">
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <a href="#it-sector">IT Sector</a>
+        <a href="#real-estate">Real Estate</a>
+        <a href="#health-medical">Health &amp; Medical</a>
+        <a href="#food-hospitality">Food &amp; Hospitality</a>
+        <a href="#fmcg">FMCG</a>
+        <a href="#financial">Financial Institutions</a>
+        <a href="#cosmetics">Cosmetics</a>
+      </nav>
+    </aside>
+
+    <!-- CONTENT -->
+    <div class="ind-content">
+
+      <!-- ═══════════ 01 · IT SECTOR ═══════════ -->
+      <div class="ind-block reveal" id="it-sector">
+        <span class="ind-section-num">01</span>
+        <span class="ind-block-eyebrow">Technology &amp; Digital</span>
+        <h2 class="ind-block-title">IT <em>Sector</em></h2>
+
+        <p class="ind-prose">Providing all kinds of HR services, drafting international contracts, procedure manuals, legal consultancy, Statutory Compliances, Litigation, drafting and vetting of various types of agreements. We have provided these services to the following clients:</p>
+
+        <div class="ind-it-client-panel">
+          <div class="ind-it-client-left">
+            <span class="ind-it-panel-label">Clients Served</span>
+            <p class="ind-it-panel-note">Trusted by technology and gaming companies navigating India's complex regulatory and commercial landscape.</p>
+          </div>
+          <div class="ind-it-client-right">
+            <div class="ind-it-client-entry">
+              <span class="ind-it-client-num">01</span>
+              <div class="ind-it-client-body">
+                <h5>Lucky Nugget India Pvt. Ltd.</h5>
+                <span>Technology &amp; Gaming</span>
+              </div>
+              <span class="ind-it-client-arrow">→</span>
+            </div>
+            <div class="ind-it-client-divider"></div>
+            <div class="ind-it-client-entry">
+              <span class="ind-it-client-num">02</span>
+              <div class="ind-it-client-body">
+                <h5>Merkur Gaming India Pvt. Ltd.</h5>
+                <span>Technology &amp; Gaming</span>
+              </div>
+              <span class="ind-it-client-arrow">→</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ 02 · REAL ESTATE ═══════════ -->
+      <div class="ind-block reveal" id="real-estate">
+        <span class="ind-section-num">02</span>
+        <span class="ind-block-eyebrow">Property &amp; Infrastructure</span>
+        <h2 class="ind-block-title">Real <em>Estate</em></h2>
+
+        <p class="ind-prose">Due Diligence, Change of Land Use, Licenses, NOCs, Builder Buyer Agreement, Service Agreement, Agreement to Sell and Purchase etc. We have provided these services to the following clients:</p>
+
+        <div class="ind-it-client-panel">
+          <div class="ind-it-client-left">
+            <span class="ind-it-panel-label">Clients Served</span>
+            <p class="ind-it-panel-note">Advising developers, investors, and construction companies across residential and commercial real estate projects.</p>
+          </div>
+          <div class="ind-it-client-right">
+            <div class="ind-it-client-entry">
+              <span class="ind-it-client-num">01</span>
+              <div class="ind-it-client-body"><h5>M/s Paras Buildtech</h5></div>
+              <span class="ind-it-client-arrow">→</span>
+            </div>
+            <div class="ind-it-client-divider"></div>
+            <div class="ind-it-client-entry">
+              <span class="ind-it-client-num">02</span>
+              <div class="ind-it-client-body"><h5>M/s Hardev Constructions Pvt. Ltd.</h5></div>
+              <span class="ind-it-client-arrow">→</span>
+            </div>
+            <div class="ind-it-client-divider"></div>
+            <div class="ind-it-client-entry">
+              <span class="ind-it-client-num">03</span>
+              <div class="ind-it-client-body"><h5>M/s Sunbelt Construction Pvt. Ltd.</h5></div>
+              <span class="ind-it-client-arrow">→</span>
+            </div>
+            <div class="ind-it-client-divider"></div>
+            <div class="ind-it-client-entry">
+              <span class="ind-it-client-num">04</span>
+              <div class="ind-it-client-body"><h5>M/s Aashiyana Constructions Pvt. Ltd.</h5></div>
+              <span class="ind-it-client-arrow">→</span>
+            </div>
+            <div class="ind-it-client-divider"></div>
+            <div class="ind-it-client-entry">
+              <span class="ind-it-client-num">05</span>
+              <div class="ind-it-client-body"><h5>M/s New India Contractors and Developers Pvt. Ltd.</h5></div>
+              <span class="ind-it-client-arrow">→</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ 03 · HEALTH & MEDICAL ═══════════ -->
+      <div class="ind-block reveal" id="health-medical">
+        <span class="ind-section-num">03</span>
+        <span class="ind-block-eyebrow">Healthcare &amp; Life Sciences</span>
+        <h2 class="ind-block-title">Health &amp; <em>Medical Sector</em></h2>
+
+        <p class="ind-prose">Our founding partner is a member of the Paras Hospitals Ethics Committee since 2010.</p>
+      </div>
+
+      <!-- ═══════════ 04 · FOOD & HOSPITALITY ═══════════ -->
+      <div class="ind-block reveal" id="food-hospitality">
+        <span class="ind-section-num">04</span>
+        <span class="ind-block-eyebrow">Food, Beverage &amp; Hotels</span>
+        <h2 class="ind-block-title">Food &amp; <em>Hospitality</em></h2>
+
+        <p>We have long term associations with various reputed establishments engaged in food, hospitality and entertainment. Some of the projects of the firm includes:</p>
+        <div class="ind-10-grid">
+          <div class="ind-10-item">
+            <span class="ind-10-num">01</span>
+            <div class="ind-10-body">
+              <h6>Viacom18 (Club Roadies) - Work with Fun Pvt Ltd</h6>
+              <p>Provided service for all statutory compliances (licenses), due diligence, drafted various agreements such as Leave and License agreement, employee agreement, Franchisee agreement, Turnkey Agreement, Partnership Agreement, Tripartite agreement, Service agreement</p>
+            </div>
+          </div>
+          <div class="ind-10-item">
+            <span class="ind-10-num">02</span>
+            <div class="ind-10-body">
+              <h6>M/s VRS Entertainment LLP</h6>
+              <p>Providing litigation, Non litigation, statutory compliance and consultancy services including HR Policy.</p>
+            </div>
+          </div>
+          <div class="ind-10-item">
+            <span class="ind-10-num">03</span>
+            <div class="ind-10-body">
+              <h6>Big bull Entertainment LLP</h6>
+              <p>Providing litigation, Non litigation, statutory compliance and consultancy services including HR Policy.</p>
+            </div>
+          </div>
+          <div class="ind-10-item">
+            <span class="ind-10-num">04</span>
+            <div class="ind-10-body">
+              <h6>M/s VRS Foods Ltd.</h6>
+              <p>Besides litigation, provided service for all statutory compliances. We also provided extensive HR Consultancy services includes drafting employee contract, vendor contract, distributor contracts, transporter contract, grievance and disciplinary procedures, Employee hand book, Code of conduct, procedure manual etc.</p>
+            </div>
+          </div>
+          <div class="ind-10-item">
+            <span class="ind-10-num">05</span>
+            <div class="ind-10-body">
+              <h6>Home by Dhaliwal</h6>
+              <p>Provided service for conversion of residential area land to Guest House area, all statutory compliances, legal and other consultancy services.</p>
+            </div>
+          </div>
+          <div class="ind-10-item">
+            <span class="ind-10-num">06</span>
+            <div class="ind-10-body">
+              <h6>Mahabali Enterprises</h6>
+              <p>Provided service for litigation, all statutory compliances, legal and other consultancy services.</p>
+            </div>
+          </div>
+          <div class="ind-10-item">
+            <span class="ind-10-num">07</span>
+            <div class="ind-10-body">
+              <h6>GKE Hospitality services</h6>
+              <p>Providing litigation, Non litigation, statutory compliance and consultancy services including HR Policy.</p>
+            </div>
+          </div>
+          <div class="ind-10-item">
+            <span class="ind-10-num">08</span>
+            <div class="ind-10-body">
+              <h6>M/s Avaeta Healthcare Pvt Ltd.</h6>
+              <p>Providing litigation, Non litigation, statutory compliance and consultancy services including HR Policy.</p>
+            </div>
+          </div>
+          <div class="ind-10-item">
+            <span class="ind-10-num">09</span>
+            <div class="ind-10-body">
+              <h6>M/s Harilal Ventures Pvt Ltd.</h6>
+              <p>Providing legal, Human Resources and consultancy services for statutory compliances.</p>
+            </div>
+          </div>
+          <div class="ind-10-item">
+            <span class="ind-10-num">10</span>
+            <div class="ind-10-body">
+              <h6>M/s. Hanu Overseas (Hotel Holiday Inn Panchkula)</h6>
+              <p>Providing litigation, Non litigation, statutory compliance and consultancy services including HR Policy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ 05 · FMCG — redesigned: horizontal pill strip ═══════════ -->
+      <div class="ind-block reveal" id="fmcg">
+        <span class="ind-section-num">05</span>
+        <span class="ind-block-eyebrow">Consumer Goods</span>
+        <h2 class="ind-block-title"><em>FMCG</em></h2>
+        <p>Providing litigation, non litigation, statutory compliances and HR policy services. We have provided this to the following clients:</p>
+
+        <div class="fmcg-strip-wrap">
+          <div class="fmcg-strip">
+            <div class="fmcg-pill">
+              <span class="fmcg-pill-num">01</span>
+              <h5>Shiv Shakti Inter Globe Pvt. Ltd.</h5>
+            </div>
+            <div class="fmcg-pill">
+              <span class="fmcg-pill-num">02</span>
+              <h5>SSIEL Signature Grains Pvt. Ltd.</h5>
+            </div>
+            <div class="fmcg-pill">
+              <span class="fmcg-pill-num">03</span>
+              <h5>SSIEL Carboxylic Esters Pvt. Ltd.</h5>
+            </div>
+            <div class="fmcg-pill">
+              <span class="fmcg-pill-num">04</span>
+              <h5>M/s KTC Foods Pvt. Ltd</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ 06 · FINANCIAL INSTITUTIONS — redesigned: 2-col grid ═══════════ -->
+      <div class="ind-block reveal" id="financial">
+        <span class="ind-section-num">06</span>
+        <span class="ind-block-eyebrow">Banking &amp; Finance</span>
+        <h2 class="ind-block-title">Engagement with <em>Financial Institutions</em></h2>
+
+        <p class="ind-prose">We take care of the litigation at various DRTS, commercial courts and civil courts. Apart from the above we also deal with Legal Audit, NECs and Legal  Notices.</p>
+
+        <p class="ind-prose"> We have a  long term association with the reputed financial institutions like:</p>
+
+        <div class="fin-grid">
+          <div class="fin-card">
+            <span class="fin-card-num">01</span>
+            <h6>UCO BANK</h6>
+          </div>
+          <div class="fin-card">
+            <span class="fin-card-num">02</span>
+            <h6>Punjab & Sind Bank.</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ 07 · COSMETICS — new, mirrors Healthcare ═══════════ -->
+      <div class="ind-block reveal" id="cosmetics">
+        <span class="ind-section-num">07</span>
+        <span class="ind-block-eyebrow">Beauty &amp; Personal Care</span>
+        <h2 class="ind-block-title"><em>Cosmetics</em></h2>
+
+        <p class="ind-prose">Providing litigation, non litigation, statutory compliances and HR policy services to reputed brands like M/s Prishee Beauty.</p>
+
+      </div>
+
+    </div><!-- /ind-content -->
+  </div><!-- /ind-layout -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container-wide">
+      <div class="footer-inner">
+        <div class="footer-brand-col">
+          <div class="footer-logo">D<span>CS</span></div>
+          <p>Strategic legal counsel for complex matters. Serving clients across India since 20XX.</p>
+          <div class="footer-bar-reg">Bar Council of India Registered</div>
+        </div>
+        <div class="footer-links-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="team.html">Our Team</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Industries</h4>
+          <ul>
+            <li><a href="#it-sector">IT Sector</a></li>
+            <li><a href="#real-estate">Real Estate</a></li>
+            <li><a href="#health-medical">Health &amp; Medical</a></li>
+            <li><a href="#food-hospitality">Food &amp; Hospitality</a></li>
+            <li><a href="#fmcg">FMCG</a></li>
+            <li><a href="#financial">Financial Institutions</a></li>
+            <li><a href="#cosmetics">Cosmetics</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a>12, Connaught Place, New Delhi 110 001</a></li>
+            <li><a>+91</a></li>
+            <li><a>info@dejurecorporate.in</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Dejure Corporate Solutions. All rights reserved.</span>
+        <span>Privacy Policy · Terms of Use</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
