@@ -305,7 +305,8 @@ document.querySelectorAll('[data-val]').forEach(el => statObserver.observe(el));
 ══════════════════════ */
 if (currentPage === 'industries') {
   const sidebarLinks = document.querySelectorAll('.ind-sidebar-nav a');
-  const sectorIds    = ['it-sector', 'real-estate', 'health-medical', 'food-hospitality', 'fmcg', 'financial'];
+  const sidebar      = document.querySelector('.ind-sidebar');
+  const sectorIds    = ['it-sector', 'real-estate', 'health-medical', 'food-hospitality', 'fmcg', 'financial', 'cosmetics'];
 
   const sectorObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -321,6 +322,18 @@ if (currentPage === 'industries') {
     const el = document.getElementById(id);
     if (el) sectorObserver.observe(el);
   });
+
+  // Fade sidebar out when contact section enters view
+  const contactSection = document.getElementById('contact');
+  if (contactSection && sidebar) {
+    const contactObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        sidebar.style.opacity       = entry.isIntersecting ? '0' : '1';
+        sidebar.style.pointerEvents = entry.isIntersecting ? 'none' : '';
+      });
+    }, { threshold: 0.05 });
+    contactObserver.observe(contactSection);
+  }
 }
 
 
